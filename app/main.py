@@ -8,8 +8,6 @@ import schemas
 
 app = FastAPI()
 
-# Create tables
-models.Base.metadata.create_all(bind=engine)
 
 # Dependency to get the database session
 def get_db():
@@ -25,7 +23,7 @@ def read_root():
 
 # Get All Products
 @app.get("/products/", response_model=list[schemas.Product])
-async def read_products(skip: int = 0, limit: int = 4, db: Session = Depends(get_db)):
+async def read_products(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     return functions.get_products(db, skip=skip, limit=limit)
 
 # Add 1 Product

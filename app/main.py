@@ -33,7 +33,8 @@ async def read_products(skip: int = 0, limit: int = 4, db: Session = Depends(get
 async def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)):
     return functions.create_product(db, product)
 
-@app.post("/stock/", response_model=schemas.StockResponse)
+# Add/Update Stock 4 item langsung
+@app.post("/add-stock/", response_model=schemas.StringResponse)
 async def add_stock(stock: schemas.StockCreate, db: Session = Depends(get_db)):
     user_id = stock.user_id
     stock_date = stock.stock_date
@@ -44,9 +45,19 @@ async def add_stock(stock: schemas.StockCreate, db: Session = Depends(get_db)):
     
     return {"message": "Stock added successfully for all products"}
 
-@app.put("/stock/{stock_id}/", response_model=schemas.Stock)
-async def update_stock(stock_id: int, update_data: schemas.StockUpdate, db: Session = Depends(get_db)):
-    updated_stock = functions.update_stock(db, stock_id, update_data.quantity)
-    if updated_stock:
-        return updated_stock
-    raise HTTPException(status_code=404, detail="Stock not found")
+# Add/Update Sales 4 item langsung
+@app.post("/add-sales/", response_model=schemas.StringResponse)
+async def add_sales(sales: schemas.SalesCreate, db: Session = Depends(get_db)):
+    user_id = sales.user_id
+    sales_date = sales.sales_date
+    sales_items = sales.sales_items
+    
+    for item in sales_items:
+        functions.add_sales(db, item, user_id, sales_date)
+    
+    return {"message": "Sales recap added successfully for all products"}
+
+@app.get("/best-sellers/", response_model=list[schemas.BestSellers])
+async def get_best_sellers(user_id: int, db: Session = Depends(get_db)):
+    best_sellers = functions.get_best_sellers(db, user_id)
+    return best_sellers

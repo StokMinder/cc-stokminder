@@ -20,3 +20,14 @@ class Stock(Base):
     stock_date = Column(Date, nullable=False)
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
+
+class Sales(Base):
+    __tablename__ = "sales"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer)  # Assuming this is the user's ID from the session
+    product_id = Column(Integer)
+    quantity = Column(Integer, nullable=True)
+    sales_date = Column(Date, nullable=False)
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())

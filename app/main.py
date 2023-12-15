@@ -59,3 +59,16 @@ async def add_sales(sales: schemas.SalesCreate, db: Session = Depends(get_db)):
 async def get_best_sellers(user_id: int, db: Session = Depends(get_db)):
     best_sellers = functions.get_best_sellers(db, user_id)
     return best_sellers
+
+# Add output recomendation to DB
+@app.post("/predict", status_code=201)
+def add_recommendation(recommendation_input: RecommendationInput, db: Session = Depends(get_db)):
+    id_user = recommendation_input.id_user
+    tanggal = recommendation_input.tanggal
+    rekomendasi = recommendation_input.rekomendasi
+    
+    new_recommendation = Recommendation(id_user=id_user, tanggal=tanggal, rekomendasi=rekomendasi)
+    db.add(new_recommendation)
+    db.commit()
+    
+    return {"message": "Data Updated!"}

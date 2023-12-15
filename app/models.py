@@ -31,3 +31,14 @@ class Sales(Base):
     sales_date = Column(Date, nullable=False)
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
+
+class RecommendationInput(Base):
+    __tablename__ = "outputrekomendasi"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer)
+    product_id = Column(Integer)
+    quantity = Column(Integer, nullable=True)
+    output_date = Column(Date, nullable=False)
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())

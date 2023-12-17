@@ -1,7 +1,7 @@
 # main.py
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from database import SessionLocal, engine
+from database import SessionLocal
 import models
 import functions
 import schemas
@@ -61,14 +61,14 @@ async def get_best_sellers(user_id: int, db: Session = Depends(get_db)):
     return best_sellers
 
 # Add output recomendation to DB
-@app.post("/predict", status_code=201)
-def add_recommendation(recommendation_input: RecommendationInput, db: Session = Depends(get_db)):
-    id_user = recommendation_input.id_user
-    tanggal = recommendation_input.tanggal
-    rekomendasi = recommendation_input.rekomendasi
+# @app.post("/predict", status_code=201)
+# def add_recommendation(recommendation_input: RecommendationInput, db: Session = Depends(get_db)):
+#     id_user = recommendation_input.id_user
+#     tanggal = recommendation_input.tanggal
+#     rekomendasi = recommendation_input.rekomendasi
     
-    new_recommendation = Recommendation(id_user=id_user, tanggal=tanggal, rekomendasi=rekomendasi)
-    db.add(new_recommendation)
-    db.commit()
+#     new_recommendation = Recommendation(id_user=id_user, tanggal=tanggal, rekomendasi=rekomendasi)
+#     db.add(new_recommendation)
+#     db.commit()
     
-    return {"message": "Data Updated!"}
+#     return {"message": "Data Updated!"}

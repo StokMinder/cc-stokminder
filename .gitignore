@@ -1,0 +1,9 @@
+# File dan direktori umum yang sering diabaikan
+__pycache__/
+pycache/
+
+# Environment-specific ignore
+.env
+
+# Ignore file .json jika mengandung konfigurasi sensitif
+*.json

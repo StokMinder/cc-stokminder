@@ -19,8 +19,8 @@ Before you begin, make sure you have the following installed on your machine:
 ## Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/stokminder-fastapi.git
-cd stokminder-fastapi
+git clone https://github.com/StokMinder/cc-stokminder.git
+cd cc-stokminder
 ```
 
 ## Setup Environment

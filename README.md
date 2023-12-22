@@ -2,6 +2,14 @@
 
 StokMinder is a FastAPI-based backend for a mobile application that predicts sales and provides restocking recommendations based on daily sales data.
 
+## The Swagger Documentation and Test The API :
+
+A. Backend :
+https://stokminder-ch2-ps429.et.r.appspot.com/
+
+B. API Documentation :
+https://stokminder-ch2-ps429.et.r.appspot.com/docs
+
 ## Prerequisites
 
 Before you begin, make sure you have the following installed on your machine:
